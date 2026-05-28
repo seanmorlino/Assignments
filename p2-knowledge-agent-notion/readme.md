@@ -114,7 +114,9 @@ https://github.com/seanmorlino/Assignments/blob/main/assignments/p2-knowledge-ag
 ---
 
 ## Part 4: Grounding Failure Analysis
-1. What grounding failure did you see — and which Module 4 failure mode does it match? 
-• While I did not directly see one of the grounding failures mentioned in module 4, I did see a failure that I think falls between a wrong chunk and hallucination. When my agent responded to certain questions, it said there was no information available in my source documents. I thought I had uploaded the wrong documents until I opened them and found what my agent should have been referencing in its responses.  It appeared that my agent was not properly reading the source material and was giving incomplete answers.  
-2. The refusal behavior is the hardest part of a knowledge agent. After testing, do you trust your refusal criteria?  
-• At this moment, I have a moderate amount of confidence in my refusal criteria. While my knowledge agent refused to answer any questions about customers or payroll, it often suggested asking a manager or a production employee for a final answer to other questions. I can appreciate that it took this course, but one of my refusal criteria was to avoid guessing, which led my agent to walk a fine line between vagueness and guessing.
+1. What grounding failure did you see — and which Module 4 failure mode does it match?
+   
+   • While I did not directly see one of the grounding failures mentioned in module 4, I did see a failure that I think falls between a wrong chunk and hallucination. When my agent responded to certain questions, it said there was no information available in my source documents. I thought I had uploaded the wrong documents until I opened them and found what my agent should have been referencing in its responses.  It appeared that my agent was not properly reading the source material and was giving incomplete answers.  
+2. The refusal behavior is the hardest part of a knowledge agent. After testing, do you trust your refusal criteria?
+   
+      •  At this moment, I have a moderate amount of confidence in my refusal criteria. While my knowledge agent refused to answer any questions about customers or payroll, it often suggested asking a manager or a production employee for a final answer to other questions. I can appreciate that it took this course, but one of my refusal criteria was to avoid guessing, which led my agent to walk a fine line between vagueness and guessing.
