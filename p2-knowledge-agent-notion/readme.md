@@ -43,11 +43,11 @@ Inventory and production knowledge base agent for a bath and body company, optim
 ---
 
 ## Part 2. Build the Knowledge Agent in Notion
-Screenshot One:
+Screenshot One:https://github.com/seanmorlino/Assignments/blob/main/assignments/p2-knowledge-agent-notion/screenshots/Knowledge%20Sources.png
 
-Screenshot Two:
+Screenshot Two:https://github.com/seanmorlino/Assignments/blob/main/assignments/p2-knowledge-agent-notion/screenshots/Screenshot%20two%20access%20panel.png
 
-Screenshot Three:
+Screenshot Three:https://github.com/seanmorlino/Assignments/blob/main/assignments/p2-knowledge-agent-notion/screenshots/Screenshot%20Three%20Agent%20System%20Prompt.png
 
 ---
 
@@ -62,7 +62,7 @@ Screenshot Three:
 | Was the answer correct? | Yes, it was correct.                                                                                       |
 | Did it refuse appropriately? | N/A                                                                                                   |
 | Pass/Fail          | Pass                                                                                                            |
-
+https://github.com/seanmorlino/Assignments/blob/main/assignments/p2-knowledge-agent-notion/screenshots/In%20scope%20question%201.png
 ---
 
 | Field              | Notes                                                                                                   |
@@ -74,7 +74,7 @@ Screenshot Three:
 | Was the answer correct? | Yes, it was correct.                                                                               |
 | Did it refuse appropriately? | N/A                                                                                           |
 | Pass/Fail          | Pass.                                                                                                   |
-
+https://github.com/seanmorlino/Assignments/blob/main/assignments/p2-knowledge-agent-notion/screenshots/In%20scope%20question%202.png
 ---
 
 | Field              | Notes                                                                                                          |
@@ -86,7 +86,7 @@ Screenshot Three:
 | Was the answer correct? | Partially. The stored procedure was correct, but the recipe reference was incorrect.                      |
 | Did it refuse appropriately? | N/A                                                                                                  |
 | Pass/Fail          | Fail.                                                                                                          |
-
+https://github.com/seanmorlino/Assignments/blob/main/assignments/p2-knowledge-agent-notion/screenshots/Edge%20Case%20Question%201.png
 ---
 
 | Field              | Notes                                                                                                                     |
@@ -98,7 +98,7 @@ Screenshot Three:
 | Was the answer correct? | Yes.                                                                                                                  |
 | Did it refuse appropriately? | N/A                                                                                                             |
 | Pass/Fail          | Pass                                                                                                                      |
-
+https://github.com/seanmorlino/Assignments/blob/main/assignments/p2-knowledge-agent-notion/screenshots/Edge%20Case%20Question%202.png
 ---
 
 | Field              | Notes                                                                                                                    |
@@ -110,7 +110,7 @@ Screenshot Three:
 | Was the answer correct? | Yes.                                                                                                                 |
 | Did it refuse appropriately? | Yes, followed refusal criteria.                                                                                 |
 | Pass/Fail          | Pass.                                                                                                                    |
-
+https://github.com/seanmorlino/Assignments/blob/main/assignments/p2-knowledge-agent-notion/screenshots/out%20of%20scope%20question%205.png
 ---
 
 ## Part 4: Grounding Failure Analysis
