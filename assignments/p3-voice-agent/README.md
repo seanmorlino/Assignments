@@ -126,6 +126,8 @@ The router greets the caller, listens to their needs, and decides which branch s
 
 **Observation:** I continued to provide ambiguous responses, and the chat feature kept asking clarifying questions. When I finally entered something that would route to the correct branch, it did so without issue. However, I noticed it would randomly end the conversation before meeting the correct criteria. I had to double-check all my conditions to ensure they were correctly defined. The agent would not carry on with a long conversation, but it did well with responding to conversations under one minute long. 
 
+---
+
 ## Part 5: Voice and Tool Failure Analysis
 
 **1. What changed — and what broke — when you moved from a text agent (Project 2) to a voice agent (Project 3)?**
