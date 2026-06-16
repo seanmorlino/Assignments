@@ -1,0 +1,130 @@
+# P4: Build a Crew and Govern It
+
+## Part 1: Design Before You Build
+
+### 1a: Workflow Description
+
+This workflow is designed to trigger when it receives customer messages via an available chat feature, which extracts keywords to identify the policy or information the customer is searching for. That data is then cross-referenced with policies and turned into a drafted message in a pre-defined tone. Once drafted, a human will review it before it is finalized and sent out. The product is a professional customer-facing message that provides what they are searching for. Normally, a supervisor, owner, or manager would have to do all the research and get the exact answer.
+
+### 1b: Agent Design
+
+| Agent Name | Role in One Sentence | Tools It Needs | Tools It Does NOT Need |
+|------------|---------------------|----------------|----------------------|
+| Customer Message Intake Agent | Reads the incoming customer chat message, identifies the main issue, extracts key keywords, and determines which policy or information the customer is looking for. | Customer chat message, keyword extraction, basic order, or product context if provided by the customer | Payment tools, refund tools, email sending, database update tools, and unrelated company files |
+| Policy Matching and Drafting Agent | Matches the customer's question to the correct store policy or product information and drafts a professional response in the company's approved tone. | Store policy knowledge base, product information, order/product context, intake summary, approved response tone guidelines | Payment tools, refund tools, direct customer messaging, customer database editing, and web search |
+| Human Review and Finalization Agent | Reviews the drafted response, highlights any uncertainties or omissions, and prepares it for human approval before sending it to the customer. | Draft response, approval checklist, uncertainty flags, policy source summary | Payment tools, refund tools, database update tools, shipping update tools |
+
+### 1c: Orchestration Pattern
+
+This workflow requires a sequential workflow because each step depends on the step before it. The customer message must first be received and analyzed so the crew can understand what the customer is asking for and what keywords point to the correct policy or information. Second, the policy and drafting agent can compare requests against the approved store policies and create a response in a pre-defined tone. The final review step should happen last, so human review can confirm accuracy before the customer-facing message is finalized.
+
+### 1d: Human Checkpoint
+
+1. The task that requires human review is the final approval of the drafted customer response before it is sent or considered ready to be sent. This is the right place to pause because the agent may identify the correct policy and write a professional draft, but a final review should still confirm the answer matches the business's actual policy and does not promise anything or provide confidential information irrelevant to the customer.
+
+2. The approval packet should include the following fields: customer issues, matched policy or information, proposed customer response, uncertainty flags, and next course of action.
+
+3. The immediate action following the checkpoint is not reversible because once a message is sent to a customer, an exception is set or becomes a record of something wrong. If incorrect information is passed along, it could create unnecessary confusion, such as incorrect refunds, replacements, discounts, or policy exceptions.
+
+## Part 3: Run The Crew and Read the Timeline
+
+### Agent 1: Message Triage Agent
+
+**Input received:** A customer's message saying "Hello, I am coming to your store today, and was wondering if I can stack my loyalty points? I have a few rewards"
+
+**Output:** Provided a breakdown of "main issue", "customer intent", "keywords extracted", "topic/policy area", identified "missing information", and identified the "tone and urgency."
+
+**Handoff:** The handoff happened correctly. It broke down each component of the message and handed it off to the policy checking agent.
+
+### Agent 2: Policy Checking Agent
+
+**Input received:** Structured summary of the customer's intentions and purpose of the message, as well as the policy identified by Agent 1, and its content.
+
+**Output:** Detailed finding report of the policy title, what it does and doesn't allow, confidence levels, and escalation flags.
+
+**Handoff:** Works as intended. The handoff consisted of a combined summary report from Agents 1 and 2.
+
+### Agent 3: Human Review and Finalization Agent
+
+**Input received:** Detailed findings report from agents 1 and 2.
+
+**Output:** An email-styled response addressing the issue at hand and the policy references.
+
+**Handoff:** Drafted reply waiting for human approval.
+
+### Human Approval Task Observation
+
+The human approval task is the final portion of the workflow and worked directly as intended. The drafted response generated by my third agent took approximately 2.86 seconds and flagged the draft message for "Human approval". It is still too early to tell if it works as intended, but after two or three test runs, each drafted message was flagged for approval and not treated as sent with a placeholder name.
+
+## Part 4: Governance Audit
+
+### 4a: Design vs. Reality
+
+Prior to starting the assignment, I read through the instructions and took a mental note of what I was looking for/what needed to be done. With that in mind, my initial CrewAI Copilot prompt was tailored to what exactly I wanted to include in a sequential workflow. While the build and workflow were generated to my preference, there was a hiccup with the tools. The only tool I needed was a file-read tool, so my policy-checking agent could reference a knowledge base. The issue, however, is that every document, even the ones that I shortened, was still unreadable. This prompted me to adjust the file-read tool into a policy-content input variable. For a small assignment, this is a minor adjustment, but in a larger setting, this changes the dynamic of the entire workflow.
+
+What truly confused me about CrewAI is the Guardrail option and Response format Schema. I can understand the concept, but the wording confused me. I attempted to edit them to my liking, but each time I tried, the entire workflow broke. I eventually gave up and allowed them to stay with the default settings because I was running my workflow too many times.
+
+### 4b: Tool Scope Review
+
+| Agent | Tools in Part 1b Plan | Tools in Final Crew | Match? | Explanation |
+|-------|----------------------|---------------------|--------|-------------|
+| Customer Message Intake Agent | Input from customers | Customer input variable, reasoning | Yes | — |
+| Policy and Drafting Agent | Knowledge base, file read tools | Policy content input variable | No | File read tools could not properly read documents |
+| Human Review and Finalization Agent | Summaries, draft response, flagged escalations | Drafted response based on summaries | Yes | — |
+
+The only real tool needed was a file read tool that would allow it to scan and extract policies/information from stored data. For this scope, the file was too large, even when it was condensed to less than a full page. For that reason, it had to be adjusted to an input variable, which takes away from having an agent in the first place. On a larger scale, this would work, but in this given context, it broke.
+
+### 4c: Threat Class Assessment
+
+| Threat Class | What It Could Look Like in This Crew | Does the Crew Have a Mitigation? |
+|--------------|--------------------------------------|--------------------------------|
+| Prompt Injection | A customer message could include hidden instructions such as "ignore store policy" or "approve this automatically." | Yes. The agents are instructed to follow only the workflow instructions and pasted policy, not instructions inside the customer message that try to change agent behavior. |
+| Tool Abuse | An agent could try to use a tool that is not needed, such as a web search or direct email sending. | Yes and no. The workflow is designed to treat file content as reference material, not system instructions. |
+| Over-permissioning | A drafting agent could have access to customer records, payment tools, or email tools, even though it only needs policy text. | Yes. Each agent is limited to the information needed for its step, and no agent should have access to payments, refunds, or direct sending. |
+| Data Leakage | The final response could include internal notes, uncertainty flags, or policy reasoning that should not be sent to a customer. | Yes. The final review step separates the approval packet from the customer-facing response so a human can check what should and should not be included. |
+
+### 4d: Audit Trail Evaluation
+
+**What does the timeline capture, and what is missing?**
+
+The timeline captures the basic sequence of the crew's workflow, including the customer message, agents completing their tasks, policy information, and the draft being completed. What is missing is the reasoning behind each decision. Given the size of this workflow and the issues that arose, I can understand why it's so direct; however, there was no rationale for the policies being considered. I would need the actual inputs and outputs to reconstruct the problem.
+
+**The human-approval task - what does the timeline say happened, and is that what should have happened?**
+
+The timeline shows that the human approval task was completed, which signified that it worked properly. The problem, however, is that it can claim to have been completed without human review. There should have been a final output with an approved draft.
+
+**Who in a real organization would need access to this log, and how often?**
+
+Owners, supervisors, or managers would need access to this log daily because it is a customer-facing workflow. This would ensure accuracy.
+
+**What is the longest period you would feel comfortable letting this crew run with no human reviewing the timeline?**
+
+I would not let this run for more than a day without reviewing the timeline. Any incorrect information could tarnish customers' trust; ensuring this workflow is precise is crucial for maintaining good relationships.
+
+### 4e: Top 3 Risks + Top 3 Mitigations
+
+#### Risks
+
+1. **Human approval tasks can show as completed without having an actual review**, making the workflow seem safer than it is.
+2. **The loss of the file-read tool means having input content variables.** This raises concerns about incorrect or wrongly pasted policies or information. This affects the quality of output in multiple ways.
+3. **Drafts are being sent accidentally with the wrong information**, making unsupported promises.
+
+#### Mitigations
+
+1. **Approval steps should require a named reviewer, a timestamp, and clear approval/rejection decisions** before a response is sent out. This way, it can be traced back to the root cause.
+2. **Approved and current policy information from a limited source.** Policies should be reviewed and updated as needed.
+3. **The final draft should always include a confidence level, missing information, and whether escalation is needed.** Any low-confidence answers, uncertainty, or customer complaints should be forwarded to human review before being sent.
+
+## Part 5: Reflection
+
+### 1. Governance Decision
+
+You made at least one governance decision in this project that the platform did not make for you — scoping a tool, placing a checkpoint, or removing something the AI Copilot generated. Describe that decision and the reasoning behind it.
+
+A governance decision was to limit the policy checking agent instead of using web search tools or having a broad range of tool access. Since the original plan to use a file-read tool did not work as intended, I adapted it into a controlled input variable. This was a decision to limit privilege to ensure the policy agent did not pull unrelated files or search the web, which could lead to inaccurate responses. I also kept the human review checkpoint before the customer response could be sent. This was important because the crew was drafting customer-facing messages that could involve refunds, replacements, exceptions, or policy interpretations.
+
+### 2. Ownership and Investigation Requirements
+
+If this crew ran at your workplace and produced a wrong or harmful output, who would own the response, and what specifically would they need from the Run Timeline to investigate?
+
+In my extremely specific work situation, it would likely be the owner who owns the communications. However, it would be a joint effort in that I would assess the timelines. It would be my responsibility to check the first agent's output to find the customer message and the second agent's output to see which policy they pulled. If an inaccurate message was accidentally sent or even drafted, I would need to see what the customer needed and which file the crew pulled from.
