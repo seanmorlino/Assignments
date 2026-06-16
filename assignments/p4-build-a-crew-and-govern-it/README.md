@@ -28,11 +28,11 @@ This workflow requires a sequential workflow because each step depends on the st
 
 ---
 
-![Initial Design](screenshots/P4-Initial-Design.png)
+![Initial Design](https://github.com/seanmorlino/Assignments/blob/main/assignments/p4-build-a-crew-and-govern-it/screenshots/P4-Initial-Design.png?raw=true)
 
-![Final Design](screenshots/P4-Final-Design.png)
+![Final Design](https://github.com/seanmorlino/Assignments/blob/main/assignments/p4-build-a-crew-and-govern-it/screenshots/P4-Final-Design.png?raw=true)
 
-![Human Checkpoint](screenshots/P4-Human-Checkpoint.png)
+![Human Checkpoint](https://github.com/seanmorlino/Assignments/blob/main/assignments/p4-build-a-crew-and-govern-it/screenshots/P4-Human-Checkpoint.png?raw=true)
 
 ---
 
@@ -68,7 +68,7 @@ The human approval task is the final portion of the workflow and worked directly
 
 ## Part 4: Governance Audit
 
-![Agent Task Completion](screenshots/P4-Agent-Tasks-Completion.png)
+![Agent Task Completion](https://github.com/seanmorlino/Assignments/blob/main/assignments/p4-build-a-crew-and-govern-it/screenshots/P4-Agent-Tasks-Completion.png?raw=true)
 
 ### 4a: Design vs. Reality
 
