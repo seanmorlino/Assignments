@@ -28,11 +28,11 @@ This workflow requires a sequential workflow because each step depends on the st
 
 ---
 
-![Initial Design](screenshots/P4_intial-design.png)
+![Initial Design](screenshots/P4-Initial-Design.png)
 
-![Final Design](screenshots/p4-final-design.png)
+![Final Design](screenshots/P4-Final-Design.png)
 
-![Human Checkpoint](screenshots/p4-human-checkpoint.png)
+![Human Checkpoint](screenshots/P4-Human-Checkpoint.png)
 
 ---
 
@@ -68,7 +68,7 @@ The human approval task is the final portion of the workflow and worked directly
 
 ## Part 4: Governance Audit
 
-![Agent Task Completion](screenshots/p4-agent-task-completion.png)
+![Agent Task Completion](screenshots/P4-Agent-Tasks-Completion.png)
 
 ### 4a: Design vs. Reality
 
